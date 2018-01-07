@@ -7,51 +7,60 @@ import * as Actions from '../actions'
 import EditPhotoForm from '../components/forms/editPhotoForm'
 
 class EditPhoto extends React.Component {
+	componentDidMount() {
+		const { actions, params } = this.props
+		actions.clearPhoto()
+		actions.getPhotoDetail(params.photoId)
+	}
 
-  componentDidMount() {
-    this.props.actions.clearPhoto()
-    this.props.actions.getPhotoDetail(this.props.params.photoId)
-  }
+	handleSubmit(values) {
+		const { actions, user } = this.props
+		actions.editPhoto(
+			values.id,
+			values.user.id,
+			values.name,
+			values.description,
+			values.category.id,
+			values.picture,
+			user.jwtToken
+		)
+		actions.getUserPhotoList(values.user.id, user.jwtToken)
+		browserHistory.push(`/photos/${values.id}`)
+	}
 
-  handleSubmit(values) {
-    this.props.actions.editPhoto(values.id, values.user.id, values.name, values.description, values.category.id, values.picture, this.props.user.jwtToken)
-    this.props.actions.getUserPhotoList(values.user.id, this.props.user.jwtToken)
-    browserHistory.push(`/photos/${values.id}`)
-  }
-
-  render() {
-    return (
-      <div className={styles['form-container']}>
-        <div className={styles['form-header']}>
-          <h2>Need to make some changes?</h2>
-        </div>
-        { // displays server error, if any
-          (this.props.photos.error)
-          ? <div>{this.props.photos.error}</div>
-          : null
-        }
-        {
-          (this.props.photos.photoDetail && this.props.user.isLoggedIn)
-          ? <EditPhotoForm photo={this.props.photos.photoDetail} handleSubmit={event => this.handleSubmit(event)} />
-        : <div>Log in to edit your photos</div>
-        }
-      </div>
-    )
-  }
+	render() {
+		const { photos, user } = this.props
+		return (
+			<div className={styles['form-container']}>
+				<div className={styles['form-header']}>
+					<h2>Need to make some changes?</h2>
+				</div>
+				{// displays server error, if any
+				photos.error ? <div>{photos.error}</div> : null}
+				{photos.photoDetail && user.isLoggedIn ? (
+					<EditPhotoForm
+						photo={photos.photoDetail}
+						handleSubmit={event => this.handleSubmit(event)}
+					/>
+				) : (
+					<div>Log in to edit your photos</div>
+				)}
+			</div>
+		)
+	}
 }
 
 function mapStateToProps(state) {
-  return {
-    photos: state.photos,
-    user: state.user
-  }
+	return {
+		photos: state.photos,
+		user: state.user,
+	}
 }
 
-
 function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
-  }
+	return {
+		actions: bindActionCreators(Actions, dispatch),
+	}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditPhoto)
