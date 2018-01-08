@@ -16,6 +16,21 @@ export const SET_NEW_PHOTO_ERRORS = 'SET_NEW_PHOTO_ERRORS'
 export const CLEAR_MESSAGE = 'CLEAR_MESSAGE'
 export const LOGIN_WITH_FACEBOOK = 'LOGIN_WITH_FACEBOOK'
 export const GET_CATEGORIES = 'GET_CATEGORIES'
+export const SET_FILTER = 'SET_FILTER'
+export const REMOVE_FILTER = 'REMOVE_FILTER'
+
+export function removeFilter() {
+	return {
+		type: REMOVE_FILTER,
+	}
+}
+
+export function setFilter(category) {
+	return {
+		type: SET_FILTER,
+		payload: category,
+	}
+}
 
 export function getCategories() {
 	const url = `${process.env.API_SERVER}/categories`

@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import styles from '../../styles/main.scss'
 import { Link } from 'react-router'
-import { getCategories } from '../actions'
+import { getCategories, setFilter } from '../actions'
 import { connect } from 'react-redux'
 
 class MainNavigation extends Component {
 	componentDidMount() {
-		console.log(this.props)
 		this.props.getCategories()
 	}
 	render() {
@@ -19,7 +18,10 @@ class MainNavigation extends Component {
 						</li>
 						{this.props.categories.map(category => (
 							<li key={category.id} className={styles['nav-item']}>
-								<Link to={`/categories/${category.id}`}>
+								<Link
+									to={`/categories/${category.id}`}
+									onClick={() => this.props.setFilter(category.name)}
+								>
 									{category.name.toUpperCase()}
 								</Link>
 							</li>
@@ -40,23 +42,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		getCategories: () => dispatch(getCategories()),
+		setFilter: category => dispatch(setFilter(category)),
 	}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainNavigation)
-
-// <li className={styles['nav-item']}>
-//   <Link to={'/categories/1'}>ANIMALS</Link>
-// </li>
-// <li className={styles['nav-item']}>
-//   <Link to="/categories/2">BLACK &amp; WHITE</Link>
-// </li>
-// <li className={styles['nav-item']}>
-//   <Link to="/categories/3">LANDSCAPE</Link>
-// </li>
-// <li className={styles['nav-item']}>
-//   <Link to="/categories/4">PEOPLE</Link>
-// </li>
-// <li className={styles['nav-item']}>
-//   <Link to="/categories/5">FOOD</Link>
-// </li>
