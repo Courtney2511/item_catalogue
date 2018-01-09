@@ -20,6 +20,19 @@ body {
   font-weight: 300;
 }
 
+a {
+  text-decoration: none;
+  color: $font-light;
+}
+
+a:visited {
+  color: inherit;
+}
+
+a:hover {
+  border-bottom: 2px solid $secondary;
+}
+
 /* Header */
 
 // header <div>
@@ -130,19 +143,6 @@ p {
   a {
     color: $font-dark;
   }
-}
-
-a {
-  text-decoration: none;
-  color: $font-light;
-}
-
-a:visited {
-  color: inherit;
-}
-
-a:hover {
-  border-bottom: 2px solid $secondary;
 }
 
 .photo-info {
