@@ -35,5 +35,3 @@ export default class App extends React.Component {
 		)
 	}
 }
-
-// <Route path="/categories/:categoryId" component={ PhotosByCategory } />
