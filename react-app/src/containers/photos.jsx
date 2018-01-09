@@ -16,7 +16,6 @@ class Photos extends React.Component {
 
 		if (filterBy !== null) {
 			photoList = photos.list.filter(photo => photo.category.name === filterBy)
-			console.log(photos.list)
 		}
 
 		return (
