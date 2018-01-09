@@ -11,7 +11,14 @@ class Photos extends React.Component {
 	}
 
 	render() {
-		const { photos, actions } = this.props
+		const { photos, actions, filterBy } = this.props
+		let photoList = photos.list
+
+		if (filterBy !== null) {
+			photoList = photos.list.filter(photo => photo.category.name === filterBy)
+			console.log(photos.list)
+		}
+
 		return (
 			<div className={styles['photos']}>
 				{// checks for error messages
@@ -19,8 +26,8 @@ class Photos extends React.Component {
 					<div className={styles['server-errors']}>{photos.errors}</div>
 				) : null}
 				{// if photos exist, displays photos
-				photos.list && photos.list.length > 0
-					? photos.list.map(photo => (
+				photoList && photoList.length > 0
+					? photoList.map(photo => (
 							<Photo
 								getUserPhotoList={actions.getUserPhotoList}
 								key={photo.id}
@@ -40,6 +47,7 @@ Photos.propTypes = {
 function mapStateToProps(state) {
 	return {
 		photos: state.photos,
+		filterBy: state.categories.filterBy,
 	}
 }
 
