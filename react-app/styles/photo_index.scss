@@ -1,7 +1,7 @@
 // @import 'main'
 
 /* palette */
-$font-dark:  #263238;
+$font-dark: #263238;
 $font-light: #fff;
 $white: #fff;
 $primary-dark: #4a0072;
@@ -45,14 +45,22 @@ $secondary-light: #ffd95a;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
+.photos {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .photo-div {
   padding: 10px;
-  width: 60%;
+  width: 300px;
+  height: 300px;
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 20px;
   background-color: $white;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .photo {
@@ -61,24 +69,23 @@ $secondary-light: #ffd95a;
 
 .photo-title {
   text-align: center;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .photo-desc {
   display: inline-block;
-  margin: 8px;
+  margin: 5px;
+  font-size: 12px;
 }
 
 .user {
-  display: inline-block;
-  padding-top: 8px;
+  display: block;
+  padding-top: 3px;
   margin-left: 8px;
   color: grey;
-}
-
-.user-image {
-  border: 1px solid black;
-  border-radius: 50%;
-  width: 15px;
+  font-size: 10px;
 }
 
 /* Photo Detail */

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
 
 /* palette */
-$font-dark:  #263238;
+$font-dark: #263238;
 $font-light: #fff;
 $white: #fff;
 $primary-dark: #4a0072;
@@ -16,7 +16,7 @@ body {
   background-color: #f4f4f5;
   margin: 0;
   color: $font-dark;
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
 
